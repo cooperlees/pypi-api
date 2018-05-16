@@ -8,15 +8,15 @@ from pypi import __version__
 
 assert version_info >= (3, 6, 0), "pypi-api requires >= Python 3.6"
 
+with open("README.md") as rfp:
+    long_description = rfp.read().strip()
 
 setup(
     name="pypi",
     version=__version__,
     description=("RESTful JSON API client for PyPI Warehouse"),
-    #    long_description='\n\n'.join(
-    #        [open('README.md').read(), open('CHANGES.md').read()]
-    #    ),
-    #    long_description_content_type="text/markdown",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     packages=["pypi"],
     url="http://github.com/cooperlees/pypi-api",
     license="Apache",
