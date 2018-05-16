@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import asyncio
-import datetime
 import unittest
 
 from .. import projects, journals
@@ -14,12 +13,12 @@ class TestJournals(unittest.TestCase):
 
     # TODO: Mock aiohttp
     def test_latest(self) -> None:
-        self.assertTrue(self.loop.run_until_complete(journals.latest()))
+        latest = self.loop.run_until_complete(journals.latest())
+        self.assertTrue(latest)
 
     def test_since(self) -> None:
-        # one_hour_ago = datetime.now() - datetime.timedelta(hours=1)
-        a_date = datetime.date(2017, 5, 15)
-        js = self.loop.run_until_complete(journals.since(int(a_date.strftime("%s"))))
+        latest = self.loop.run_until_complete(journals.latest())
+        js = self.loop.run_until_complete(journals.since(latest['last_serial']))
         self.assertTrue(len(js), 5000)
 
 
